@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vía Express | Corporativo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .bg-via-blue { background-color: #002D5A; }
+        .text-via-orange { color: #F0810F; }
+        .card-shadow { box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+        .modal-bg { background-color: rgba(0, 45, 90, 0.9); }
+    </style>
+</head>
+<body class="bg-white font-sans text-gray-800 pb-12">
+
+    <header class="bg-via-blue text-white py-12 px-6 rounded-b-[3.5rem] shadow-2xl border-b-4 border-via-orange text-center">
+        <h1 class="text-4xl font-extrabold tracking-tighter italic">VÍA <span class="text-via-orange">EXPRESS</span></h1>
+        <p class="text-xs uppercase tracking-[0.25em] mt-3 font-bold opacity-90">Agencia de Viajes y Gestoría Corporativa</p>
+    </header>
+
+    <main class="container mx-auto px-5 -mt-12">
+        <div class="grid grid-cols-2 gap-6">
+            <button onclick="ver('Vuelos')" class="bg-white p-7 rounded-3xl text-center card-shadow flex flex-col items-center border border-gray-100">
+                <span class="text-4xl">✈️</span>
+                <h3 class="font-bold text-via-blue mt-3 uppercase text-[10px] tracking-widest">Vuelos</h3>
+            </button>
+            <button onclick="ver('Hoteles')" class="bg-white p-7 rounded-3xl text-center card-shadow flex flex-col items-center border border-gray-100">
+                <span class="text-4xl">🏨</span>
+                <h3 class="font-bold text-via-blue mt-3 uppercase text-[10px] tracking-widest">Hoteles</h3>
+            </button>
+            <button onclick="ver('Seguros')" class="bg-white p-7 rounded-3xl text-center card-shadow flex flex-col items-center border border-gray-100">
+                <span class="text-4xl">🚗</span>
+                <h3 class="font-bold text-via-blue mt-3 uppercase text-[10px] tracking-widest">Seguros</h3>
+            </button>
+            <button onclick="ver('Pagos')" class="bg-white p-7 rounded-3xl text-center card-shadow flex flex-col items-center border border-gray-100">
+                <span class="text-4xl">💧</span>
+                <h3 class="font-bold text-via-blue mt-3 uppercase text-[10px] tracking-widest">Pagos</h3>
+            </button>
+            <button onclick="ver('Recargas')" class="bg-white p-7 rounded-3xl text-center card-shadow flex flex-col items-center border border-gray-100">
+                <span class="text-4xl">📱</span>
+                <h3 class="font-bold text-via-blue mt-3 uppercase text-[10px] tracking-widest">Recargas</h3>
+            </button>
+            <button onclick="ver('Abonos')" class="bg-white p-7 rounded-3xl text-center card-shadow flex flex-col items-center border border-gray-100">
+                <span class="text-4xl">💳</span>
+                <h3 class="font-bold text-via-blue mt-3 uppercase text-[10px] tracking-widest">Abonos</h3>
+            </button>
+        </div>
+
+        <div class="mt-12 space-y-4 max-w-md mx-auto">
+            <a href="https://wa.me/524424683442" class="bg-green-600 text-white p-5 rounded-2xl flex justify-center shadow-lg font-bold uppercase text-sm italic">WhatsApp Oficial</a>
+            <a href="https://t.me/recervas_pedidos_materialccv_bot" class="bg-sky-600 text-white p-5 rounded-2xl flex justify-center shadow-lg font-bold uppercase text-sm italic">Telegram Bot</a>
+        </div>
+    </main>
+
+    <div id="m" class="hidden fixed inset-0 modal-bg flex items-center justify-center p-5 z-50">
+        <div class="bg-white w-full max-w-md rounded-[2.5rem] p-8 shadow-2xl">
+            <h2 id="t" class="font-extrabold text-center mb-5 text-via-blue border-b-2 border-via-orange pb-3 uppercase italic text-sm"></h2>
+            <input type="text" id="n" placeholder="Nombre completo" class="w-full p-4 bg-gray-50 rounded-xl mb-3 border font-semibold text-sm">
+            <div class="mb-3 text-left">
+                <label class="text-[10px] font-bold text-gray-400 uppercase ml-1">Compañía:</label>
+                <select id="o" class="w-full p-4 bg-white rounded-xl border font-bold text-sm"></select>
+            </div>
+            <textarea id="d" rows="3" placeholder="Detalles..." class="w-full p-4 bg-gray-50 rounded-xl mb-4 border text-sm"></textarea>
+            <button onclick="go()" class="w-full bg-via-blue text-white font-extrabold py-5 rounded-xl uppercase shadow-lg text-sm italic">Confirmar</button>
+            <button onclick="document.getElementById('m').classList.add('hidden')" class="w-full mt-5 text-gray-400 font-bold text-[11px] uppercase">Cancelar</button>
+        </div>
+    </div>
+
+    <script>
+        const ops = {
+            "Vuelos": ["Volaris", "Aeroméxico", "Viva Aerobus", "American Airlines", "Todas"],
+            "Hoteles": ["Cualquier Hotel", "Hampton Inn", "Holiday Inn", "Resorts"],
+            "Seguros": ["Qualitas", "GNP", "AIG", "Atlas", "ANA", "Chubb", "AXXA"],
+            "Recargas": ["BAIT", "Movistar", "AT&T"],
+            "Pagos": ["Agua de Hermosillo", "Facturas Telcel", "Total Play", "SKY", "Megacable", "Telmex", "Izzi", "Dish"],
+            "Abonos": ["Coppel", "Mercado Crédito", "Liverpool", "MoneyMan", "Aplazo", "Sears", "Suburbia", "Universidad UTEL"]
+        };
+        let s = "";
+        function ver(x) {
+            s = x;
+            document.getElementById('t').innerText = "Solicitud: " + x;
+            document.getElementById('o').innerHTML = ops[x].map(i => `<option value="${i}">${i}</option>`).join('');
+            document.getElementById('m').classList.remove('hidden');
+        }
+        function go() {
+            const n = document.getElementById('n').value;
+            const o = document.getElementById('o').value;
+            const d = document.getElementById('d').value;
+            if(!n || !d) return alert("Llena los campos.");
+            const msg = `SOLICITUD VIA EXPRESS\n--------------------\nCLIENTE: ${n}\nSERVICIO: ${s}\nCIA: ${o}\nDETALLES: ${d}`;
+            window.location.href = `https://wa.me/524424683442?text=${encodeURIComponent(msg)}`;
+        }
+    </script>
+</body>
+</html>
