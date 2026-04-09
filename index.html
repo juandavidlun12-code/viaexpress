@@ -73,7 +73,7 @@
             "Hoteles": ["Cualquier Hotel", "Hampton Inn", "Holiday Inn", "Resorts"],
             "Seguros": ["Qualitas", "GNP", "AIG", "Atlas", "ANA", "Chubb", "AXXA"],
             "Recargas": ["BAIT", "Movistar", "AT&T"],
-            "Pagos": ["Agua de Hermosillo", "Facturas Telcel", "Total Play", "SKY", "Megacable", "Telmex", "Izzi", "Dish"],
+            "Pagos": ["Agua de Hermosillo", "Telcel", "Total Play", "SKY", "Megacable", "Telmex", "Izzi", "Dish"],
             "Abonos": ["Coppel", "Mercado Crédito", "Liverpool", "MoneyMan", "Aplazo", "Sears", "Suburbia", "Universidad UTEL"]
         };
         let s = "";
@@ -88,7 +88,7 @@
             const o = document.getElementById('o').value;
             const d = document.getElementById('d').value;
             if(!n || !d) return alert("Llena los campos.");
-            const msg = `SOLICITUD VIA EXPRESS\n--------------------\nCLIENTE: ${n}\nSERVICIO: ${s}\nCIA: ${o}\nDETALLES: ${d}`;
+            const msg = `SOLICITUD VIA EXPRESS\nCLIENTE: ${n}\nSERVICIO: ${s}\nCIA: ${o}\nDETALLES: ${d}`;
             window.location.href = `https://wa.me/524424683442?text=${encodeURIComponent(msg)}`;
         }
     </script>
